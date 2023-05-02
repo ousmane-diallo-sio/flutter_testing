@@ -3,6 +3,7 @@ import 'package:flutter_testing/color_button.dart';
 
 class Home extends StatefulWidget {
   var colorIndex = 0;
+  double? btnWidth;
 
   Home({Key? key}) : super(key: key);
 
@@ -11,8 +12,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   @override
   Widget build(BuildContext context) {
+
+    final deviceWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -29,19 +34,25 @@ class _HomeState extends State<Home> {
             ),
             Expanded(
               flex: 3,
-              child: ColorButton(
-                onTap: () {
-                  setState(() {
-                    widget.colorIndex += 1;
-                  });
-                },
-                spam: true
-            ),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                width: widget.btnWidth,
+                child: ColorButton(
+                    width: double.maxFinite,
+                    onTap: () {
+                      setState(() {
+                        widget.colorIndex += 1;
+                        widget.btnWidth = (widget.colorIndex * 100) % deviceWidth;
+                      });
+                    },
+                    spam: true),
+              ),
             ),
           ],
         ),
       ),
-      backgroundColor: Colors.accents.elementAt(widget.colorIndex % Colors.accents.length),
+      backgroundColor:
+          Colors.accents.elementAt(widget.colorIndex % Colors.accents.length),
     );
     ;
   }

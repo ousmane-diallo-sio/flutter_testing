@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 class ColorButton extends StatefulWidget {
 
   final void Function() onTap;
+  final double? width;
   final bool? spam;
 
-  ColorButton({Key? key, required this.onTap, this.spam}) : super(key: key);
+  ColorButton({Key? key, required this.onTap, this.width, this.spam}) : super(key: key);
 
   @override
   State<ColorButton> createState() => _ColorButtonState();
@@ -43,7 +44,7 @@ class _ColorButtonState extends State<ColorButton> {
         timer.cancel();
       },
       child: Container(
-        width: 100,
+        width: widget.width ?? 100,
         height: 100,
         color: Colors.blueAccent,
       ),
