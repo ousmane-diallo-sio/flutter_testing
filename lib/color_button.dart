@@ -4,31 +4,27 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 
 class ColorButton extends StatefulWidget {
-
   final void Function() onTap;
   final double? width;
   final bool? spam;
 
-  ColorButton({Key? key, required this.onTap, this.width, this.spam}) : super(key: key);
+  ColorButton({Key? key, required this.onTap, this.width, this.spam})
+      : super(key: key);
 
   @override
   State<ColorButton> createState() => _ColorButtonState();
 }
 
 class _ColorButtonState extends State<ColorButton> {
-  late Timer timer;
+  Timer? timer;
 
-  _startSpamming() {
-    timer = Timer.periodic(const Duration(milliseconds: 200), (_) {
-      widget.onTap();
-    });
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _startSpamming();
+  _handleSpamming() {
+    print("ouai");
+    if (timer == null || widget.spam == true && timer?.isActive == false) {
+      timer = Timer.periodic(const Duration(milliseconds: 300), (_) {
+        widget.onTap();
+      });
+    }
   }
 
   @override
@@ -36,17 +32,24 @@ class _ColorButtonState extends State<ColorButton> {
     return GestureDetector(
       onTap: () {
         widget.onTap();
-        if (widget.spam == true && !timer.isActive) {
-          _startSpamming();
-        }
+        _handleSpamming();
       },
       onDoubleTap: () {
-        timer.cancel();
+        timer?.cancel();
       },
       child: Container(
         width: widget.width ?? 100,
         height: 100,
-        color: Colors.blueAccent,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue.shade400, Colors.deepOrange],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: const Center(
+          child: Text("Click me"),
+        ),
       ),
     );
   }
