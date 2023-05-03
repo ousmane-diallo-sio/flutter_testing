@@ -15,4 +15,9 @@ class UserWebService {
         userName: json['username'] is String ? json['username'] : null,
         email: json['email'] is String ? json['email'] : null);
   }
+
+  @override
+  String toString() {
+    return 'user : {name: $name}';
+  }
 }
