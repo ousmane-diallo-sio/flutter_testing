@@ -76,7 +76,10 @@ class NavigationHome extends StatelessWidget {
     );
   }
 
-  /* Il existe plusieurs manières de gérer la navigation */
+  /*
+  Il existe plusieurs manières de gérer la navigation:
+  Voir également d'autres packages disponibles sur pub.dev
+  */
 
   // Méthode 1
   void _goToScreenA(BuildContext context) {
@@ -89,12 +92,12 @@ class NavigationHome extends StatelessWidget {
     );
   }
 
-  // Méthode 2 (la meilleure)
+  // Méthode 2
   void _goToScreenB(BuildContext context) {
     Navigator.of(context).pushNamed(ScreenB.routeName);
   }
 
-  // Méthode 3 (permet l'envoi de données)
+  // Méthode 3 (la meilleure permet l'envoi de données)
   void _goToScreenC(BuildContext context) {
     // Le début de la logique se situe dans le onGeneratedRoute du widget MaterialApp
     ScreenC.navigateTo(context, 123);
