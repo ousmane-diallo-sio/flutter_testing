@@ -19,7 +19,6 @@ class _ColorButtonState extends State<ColorButton> {
   Timer? timer;
 
   _handleSpamming() {
-    print("ouai");
     if (timer == null || widget.spam == true && timer?.isActive == false) {
       timer = Timer.periodic(const Duration(milliseconds: 300), (_) {
         widget.onTap();
