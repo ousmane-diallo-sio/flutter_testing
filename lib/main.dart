@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_testing/configuration_widget.dart';
 import 'package:flutter_testing/home.dart';
 
 void main() {
@@ -10,12 +11,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Testing title',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
+    return ConfigurationWidget(
+      configuration: Configuration(
+        baseUrl: 'https://jsonplaceholder.typicode.com',
       ),
-      home: SafeArea(child: Home()),
+      child: MaterialApp(
+        title: 'Flutter Testing title',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
+        home: SafeArea(child: Home()),
+      ),
     );
   }
 }

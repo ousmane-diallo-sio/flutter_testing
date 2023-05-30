@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_testing/color_button.dart';
+import 'package:flutter_testing/configuration_widget.dart';
 import 'package:flutter_testing/red_circle.dart';
 
 class Home extends StatefulWidget {
@@ -14,6 +15,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+
+    final baseUrl = ConfigurationWidget.of(context).configuration.baseUrl;
+    print("baseUrl : $baseUrl");
+
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
